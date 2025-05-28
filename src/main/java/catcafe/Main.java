@@ -14,6 +14,7 @@ public class Main {
         cafe.addCat(new FelineOverLord("Gwenapurr Esmeralda", 3));
         cafe.addCat(new FelineOverLord("Morticia", 3));
         cafe.addCat(new FelineOverLord("Fitzby Darnsworth", 5));
+        cafe.addCat(new FelineOverLord("Little Tapsy", 1));
 
         System.out.println("Es schnurren " + cafe.getCatCount() + " Samtpfötchen.");
 
