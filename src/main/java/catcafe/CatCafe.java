@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import tree.Empty;
 import tree.Tree;
 import tree.TreeVisitor;
+import java.util.Optional;
 
 /** A cat café takes care of a number of cats. */
 public class CatCafe {
@@ -32,16 +33,15 @@ public class CatCafe {
      * Pick up the first cat in the café with a given name.
      *
      * @param name name of the cat
-     * @return cat with the given name
+     * @return an Optional containing the cat with the given name, or empty if not found
      */
-    public FelineOverLord getCatByName(String name) {
-        if (name == null) return null;
-
-        for (FelineOverLord c : clowder) {
-            if (c.name().equals(name)) return c;
+    public Optional<FelineOverLord> getCatByName(String name) {
+        if (name == null) {
+            return Optional.empty();
         }
-
-        return null;
+        return clowder.stream()
+            .filter(cat -> cat.name().equals(name))
+            .findFirst();
     }
 
     /**
@@ -49,17 +49,15 @@ public class CatCafe {
      *
      * @param minWeight lower weight limit (inclusive)
      * @param maxWeight upper weight limit (exclusive)
-     * @return cat within the weight limits
+     * @return an Optional containing the cat within the weight limits, or empty if not found
      */
-    public FelineOverLord getCatByWeight(int minWeight, int maxWeight) {
-        if (minWeight < 0) return null;
-        if (maxWeight < minWeight) return null;
-
-        for (FelineOverLord c : clowder) {
-            if (c.weight() >= minWeight && c.weight() < maxWeight) return c;
+    public Optional<FelineOverLord> getCatByWeight(int minWeight, int maxWeight) {
+        if (minWeight < 0 || maxWeight < minWeight) {
+            return Optional.empty();
         }
-
-        return null;
+        return clowder.stream()
+            .filter(cat -> cat.weight() >= minWeight && cat.weight() < maxWeight)
+            .findFirst();
     }
 
     /**
@@ -73,6 +71,6 @@ public class CatCafe {
      * @throws NullPointerException if visitor is {@code null}
      */
     String accept(TreeVisitor<FelineOverLord> visitor) {
-        return clowder.accept(visitor);
+        return clowder.accept(requireNonNull(visitor));
     }
 }
