@@ -70,7 +70,7 @@ public class CatCafe {
      * @return a string representation as result of the traversal process
      * @throws NullPointerException if visitor is {@code null}
      */
-    String accept(TreeVisitor<FelineOverLord> visitor) {
+    public String accept(TreeVisitor<FelineOverLord> visitor) {
         return clowder.accept(requireNonNull(visitor));
     }
 }
