@@ -1,12 +1,10 @@
 package catcafe;
+import tree.*;
 
-/** Starter for the cat-café task. */
+/**
+ * Starter for the cat-café task.
+ */
 public class Main {
-    /**
-     * And go.
-     *
-     * @param args command line parameters, not used
-     */
     public static void main(String... args) {
         CatCafe cafe = new CatCafe();
 
@@ -14,7 +12,7 @@ public class Main {
         cafe.addCat(new FelineOverLord("Gwenapurr Esmeralda", 3));
         cafe.addCat(new FelineOverLord("Morticia", 3));
         cafe.addCat(new FelineOverLord("Fitzby Darnsworth", 5));
-        cafe.addCat(new FelineOverLord("DR Doom",20));
+        cafe.addCat(new FelineOverLord("Little Tapsy", 1));
 
         System.out.println("Es schnurren " + cafe.getCatCount() + " Samtpfötchen.");
 
@@ -35,5 +33,8 @@ public class Main {
                 cat -> System.out.println("Name 'Miss Chief Sooky': " + cat),
                 () -> System.out.println("Keine Katze namens Miss Chief Sooky gefunden")
             );
+
+        System.out.println("Inorder: " + cafe.accept(new InOrderVisitor<>()));
+        System.out.println("Postorder: " + cafe.accept(new PostOrderVisitor<>()));
     }
 }
